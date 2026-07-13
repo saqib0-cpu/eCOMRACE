@@ -85,8 +85,8 @@ export default function Shop() {
       <div className="filter-section">
         <p className="filter-section-title">Price Range</p>
         <div className="price-range-labels">
-          <span>$0</span>
-          <span>${priceMax}</span>
+          <span>Rs 0</span>
+          <span>Rs {priceMax}</span>
         </div>
         <input
           type="range"

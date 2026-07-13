@@ -103,7 +103,7 @@ export default function Cart() {
                         <button onClick={() => updateQty(item.id, item.qty + 1)} style={{ width: 34, height: 34, background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-main)', fontSize: '1rem', fontFamily: 'var(--font-main)' }}>+</button>
                       </div>
                       <span style={{ fontWeight: 700, fontSize: '1.05rem' }}>
-                        ${((item.salePrice || item.price) * item.qty).toFixed(2)}
+                        Rs {((item.salePrice || item.price) * item.qty).toFixed(2)}
                       </span>
                     </div>
                   </div>
@@ -147,9 +147,9 @@ export default function Cart() {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginBottom: 24 }}>
               {[
-                { label: 'Subtotal', val: `$${cartTotal.toFixed(2)}` },
-                { label: 'Discount', val: couponApplied ? `-$${discount.toFixed(2)}` : '—', color: couponApplied ? '#22c55e' : undefined },
-                { label: 'Shipping', val: shipping === 0 ? 'Free 🎉' : `$${shipping.toFixed(2)}`, color: shipping === 0 ? '#22c55e' : undefined },
+                { label: 'Subtotal', val: `Rs ${cartTotal.toFixed(2)}` },
+                { label: 'Discount', val: couponApplied ? `-Rs ${discount.toFixed(2)}` : '—', color: couponApplied ? '#22c55e' : undefined },
+                { label: 'Shipping', val: shipping === 0 ? 'Free 🎉' : `Rs ${shipping.toFixed(2)}`, color: shipping === 0 ? '#22c55e' : undefined },
               ].map(r => (
                 <div key={r.label} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem' }}>
                   <span style={{ color: 'var(--text-muted)' }}>{r.label}</span>
@@ -158,7 +158,7 @@ export default function Cart() {
               ))}
               <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: 14, display: 'flex', justifyContent: 'space-between', fontSize: '1.1rem', fontWeight: 800 }}>
                 <span>Total</span>
-                <span style={{ color: 'var(--accent-gold)' }}>${finalTotal.toFixed(2)}</span>
+                <span style={{ color: 'var(--accent-gold)' }}>Rs {finalTotal.toFixed(2)}</span>
               </div>
             </div>
 

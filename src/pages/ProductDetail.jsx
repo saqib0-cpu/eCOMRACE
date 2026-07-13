@@ -129,10 +129,10 @@ export default function ProductDetail() {
             </div>
 
             <div className="product-info-price">
-              <span className="product-price-current">${product.salePrice || product.price}</span>
+              <span className="product-price-current">Rs {product.salePrice || product.price}</span>
               {product.salePrice && (
                 <>
-                  <span className="product-price-original">${product.price}</span>
+                  <span className="product-price-original">Rs {product.price}</span>
                   <span className="product-discount-badge">-{discountPct}%</span>
                 </>
               )}

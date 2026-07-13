@@ -222,7 +222,7 @@ export default function Navbar() {
                         <img src={p.image} alt={p.name} className="search-result-img" />
                         <div className="search-result-info">
                           <h4>{p.name}</h4>
-                          <p>${p.salePrice || p.price}</p>
+                          <p>Rs {p.salePrice || p.price}</p>
                         </div>
                       </div>
                     ))}

@@ -235,4 +235,53 @@ export const PRODUCTS = [
     sku: 'DCR-004', tags: ['art', 'gold', 'canvas'],
     specs: { 'Size': '60x80cm', 'Frame': 'Black Aluminum', 'Print': 'UV Museum Quality', 'Hanging': 'Hardware included' },
   },
+
+  // Additional Watches
+  {
+    id: 21, name: 'Obsidian Smart Fit', category: 'watches', subcategory: 'Smart Watches',
+    price: 159, salePrice: 129, rating: 4.5, reviews: 312, inStock: true, isNew: true, isBestSeller: false,
+    image: 'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=400&q=80',
+    images: ['https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=800&q=80'],
+    description: 'Sleek fitness tracking smartwatch with heart rate monitoring and sleep tracking.',
+    sku: 'WCH-007', tags: ['smart', 'fitness', 'black'],
+    specs: { 'Display': 'OLED', 'Battery': '5 days', 'Water Resistance': 'IP68', 'OS': 'Custom' },
+  },
+  {
+    id: 22, name: 'Vintage Pocket Watch', category: 'watches', subcategory: 'Pocket Watches',
+    price: 89, salePrice: null, rating: 4.8, reviews: 67, inStock: true, isNew: false, isBestSeller: false,
+    image: 'https://images.unsplash.com/photo-1501166222995-1081541bd1dc?w=400&q=80',
+    images: ['https://images.unsplash.com/photo-1501166222995-1081541bd1dc?w=800&q=80'],
+    description: 'A classic mechanical pocket watch with bronze finish and intricate chain.',
+    sku: 'WCH-008', tags: ['vintage', 'pocket', 'bronze'],
+    specs: { 'Material': 'Bronze Alloy', 'Movement': 'Mechanical Hand Wind', 'Chain': 'Included' },
+  },
+  
+  // Additional Mobile Accessories
+  {
+    id: 23, name: 'Magnetic Wireless Power Bank', category: 'mobile-accessories', subcategory: 'Power Banks',
+    price: 45, salePrice: 39, rating: 4.9, reviews: 521, inStock: true, isNew: true, isBestSeller: true,
+    image: 'https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400&q=80',
+    images: ['https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=800&q=80'],
+    description: 'Snap-on 10,000mAh magnetic power bank. Perfect for on-the-go wireless charging.',
+    sku: 'MOB-007', tags: ['magsafe', 'wireless', 'powerbank'],
+    specs: { 'Capacity': '10,000mAh', 'Wireless Output': '15W', 'Wired Output': '20W PD', 'Compatibility': 'MagSafe' },
+  },
+  {
+    id: 24, name: 'True Wireless Earbuds Mini', category: 'mobile-accessories', subcategory: 'Earphones',
+    price: 35, salePrice: null, rating: 4.4, reviews: 210, inStock: true, isNew: false, isBestSeller: false,
+    image: 'https://images.unsplash.com/photo-1606220588913-b3aea8f5d18a?w=400&q=80',
+    images: ['https://images.unsplash.com/photo-1606220588913-b3aea8f5d18a?w=800&q=80'],
+    description: 'Ultra-compact wireless earbuds with punchy bass and 20 hours total playtime.',
+    sku: 'MOB-008', tags: ['tws', 'earbuds', 'audio'],
+    specs: { 'Bluetooth': '5.2', 'Battery': '5h + 15h case', 'Water Resistance': 'IPX4', 'Mic': 'Dual Mic setup' },
+  },
+  {
+    id: 25, name: 'Multi-Port USB-C Hub', category: 'mobile-accessories', subcategory: 'Cables',
+    price: 25, salePrice: 19, rating: 4.6, reviews: 156, inStock: true, isNew: false, isBestSeller: false,
+    image: 'https://images.unsplash.com/photo-1544865107-742a17387ccb?w=400&q=80',
+    images: ['https://images.unsplash.com/photo-1544865107-742a17387ccb?w=800&q=80'],
+    description: '7-in-1 USB-C Hub with 4K HDMI, SD Card reader, and 100W PD passthrough.',
+    sku: 'MOB-009', tags: ['hub', 'usb-c', 'hdmi'],
+    specs: { 'Ports': 'HDMI, SD, TF, USB-A x2, USB-C PD', 'Material': 'Aluminum', 'Max PD': '100W' },
+  }
 ];

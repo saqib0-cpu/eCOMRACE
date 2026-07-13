@@ -30,7 +30,7 @@ const HERO_SLIDES = [
 
 const TRUST_BADGES = [
   { icon: '🔒', title: 'Secure Payments', desc: '256-bit SSL encryption on all transactions' },
-  { icon: '🚚', title: 'Free Shipping', desc: 'On all orders over $75 worldwide' },
+  { icon: '🚚', title: 'Free Shipping', desc: 'On all orders over Rs 7500 worldwide' },
   { icon: '↩', title: 'Easy Returns', desc: '30-day hassle-free returns & exchanges' },
   { icon: '⭐', title: 'Quality Guarantee', desc: 'Authentic products from trusted brands' },
 ];
@@ -331,7 +331,7 @@ export default function Home() {
             View All <ArrowRight size={15} />
           </Link>
         </div>
-        <div className="products-grid" style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
+        <div className="products-grid">
           {bestSellers.map((product, i) => (
             <ProductCard key={product.id} product={product} index={i} />
           ))}

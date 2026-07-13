@@ -147,8 +147,8 @@ export default function Checkout() {
 
                   <h3 style={{ fontWeight: 700, marginTop: 28, marginBottom: 16 }}>Shipping Method</h3>
                   {[
-                    { id: 'standard', label: 'Standard Shipping', sub: '5–7 Business Days', price: cartTotal > 75 ? 'Free' : '$9.99' },
-                    { id: 'express', label: 'Express Shipping', sub: '1–2 Business Days', price: '$14.99' },
+                    { id: 'standard', label: 'Standard Shipping', sub: '5–7 Business Days', price: cartTotal > 75 ? 'Free' : 'Rs 999' },
+                    { id: 'express', label: 'Express Shipping', sub: '1–2 Business Days', price: 'Rs 1499' },
                   ].map(s => (
                     <div
                       key={s.id}
@@ -235,7 +235,7 @@ export default function Checkout() {
                           <p style={{ fontSize: '0.875rem', fontWeight: 600 }}>{item.name}</p>
                           <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Qty: {item.qty}</p>
                         </div>
-                        <span style={{ fontWeight: 700 }}>${((item.salePrice || item.price) * item.qty).toFixed(2)}</span>
+                        <span style={{ fontWeight: 700 }}>Rs {((item.salePrice || item.price) * item.qty).toFixed(2)}</span>
                       </div>
                     ))}
                   </div>
@@ -272,8 +272,8 @@ export default function Checkout() {
           <div style={{ background: 'var(--surface-color)', border: '1px solid var(--border-color)', borderRadius: 20, padding: 24, position: 'sticky', top: 90 }}>
             <h3 style={{ fontWeight: 700, marginBottom: 20, fontSize: '1rem' }}>Summary</h3>
             {[
-              { label: 'Subtotal', val: `$${cartTotal.toFixed(2)}` },
-              { label: 'Shipping', val: shipping === 0 ? 'Free 🎉' : `$${shipping.toFixed(2)}` },
+              { label: 'Subtotal', val: `Rs ${cartTotal.toFixed(2)}` },
+              { label: 'Shipping', val: shipping === 0 ? 'Free 🎉' : `Rs ${shipping.toFixed(2)}` },
             ].map(r => (
               <div key={r.label} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem', marginBottom: 12 }}>
                 <span style={{ color: 'var(--text-muted)' }}>{r.label}</span>
@@ -282,7 +282,7 @@ export default function Checkout() {
             ))}
             <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: 14, display: 'flex', justifyContent: 'space-between', fontWeight: 800, fontSize: '1.1rem' }}>
               <span>Total</span>
-              <span style={{ color: 'var(--accent-gold)' }}>${total.toFixed(2)}</span>
+              <span style={{ color: 'var(--accent-gold)' }}>Rs {total.toFixed(2)}</span>
             </div>
           </div>
         </div>

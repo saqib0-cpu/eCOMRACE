@@ -86,8 +86,8 @@ export default function ProductCard({ product, index = 0 }) {
         </div>
         <div className="product-card-footer">
           <div className="price-group">
-            <span className="price-current">${product.salePrice || product.price}</span>
-            {product.salePrice && <span className="price-original">${product.price}</span>}
+            <span className="price-current">Rs {product.salePrice || product.price}</span>
+            {product.salePrice && <span className="price-original">Rs {product.price}</span>}
           </div>
           <button
             className="add-cart-btn"

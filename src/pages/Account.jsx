@@ -152,7 +152,7 @@ export default function Account() {
                     }}>
                       {order.status}
                     </span>
-                    <span style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--accent-gold)' }}>${order.total}</span>
+                    <span style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--accent-gold)' }}>Rs {order.total}</span>
                     <button style={{ display: 'flex', alignItems: 'center', gap: 4, color: 'var(--text-muted)', background: 'none', border: 'none', cursor: 'pointer', fontSize: '0.8rem', fontFamily: 'var(--font-main)' }}>
                       View <ChevronRight size={14} />
                     </button>
