@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check } from 'lucide-react';
@@ -6,14 +6,17 @@ import { useCart } from '../context/CartContext';
 
 const STEPS = ['Shipping', 'Payment', 'Confirm'];
 
-const InputField = ({ label, type = 'text', placeholder, value, onChange, required }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+const InputField = ({ label, type = 'text', placeholder, value, onChange, required, disabled, inputRef, onKeyDown }) => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: 6, opacity: disabled ? 0.5 : 1, transition: 'opacity 0.3s' }}>
     <label style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 500 }}>{label}{required && ' *'}</label>
     <input
+      ref={inputRef}
       type={type}
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      onKeyDown={onKeyDown}
+      disabled={disabled}
       style={{
         background: 'var(--surface-color-light)',
         border: '1px solid var(--border-color)',
@@ -42,6 +45,36 @@ export default function Checkout() {
     firstName: '', lastName: '', email: '', phone: '',
     address: '', city: '', state: '', zip: '', country: '',
   });
+
+  const inputRefs = useRef({});
+  const setRef = key => el => { inputRefs.current[key] = el; };
+
+  const fieldOrder = ['firstName', 'lastName', 'email', 'phone', 'address', 'city', 'state', 'zip', 'country'];
+  const requiredFields = ['firstName', 'lastName', 'email', 'address', 'city', 'zip', 'country'];
+
+  const isFieldDisabled = (key) => {
+     const idx = fieldOrder.indexOf(key);
+     if (idx <= 0) return false;
+     for(let i=0; i<idx; i++) {
+        const prevKey = fieldOrder[i];
+        if (requiredFields.includes(prevKey) && !form[prevKey]) return true;
+     }
+     return false;
+  };
+
+  const handleKeyDown = (key) => (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (!form[key] && requiredFields.includes(key)) return;
+      const idx = fieldOrder.indexOf(key);
+      if (idx >= 0 && idx < fieldOrder.length - 1) {
+        const nextKey = fieldOrder[idx + 1];
+        if (inputRefs.current[nextKey]) {
+          inputRefs.current[nextKey].focus();
+        }
+      }
+    }
+  };
 
   const shipping = shippingMethod === 'express' ? 14.99 : (cartTotal > 75 ? 0 : 9.99);
   const total = cartTotal + shipping;
@@ -132,17 +165,17 @@ export default function Checkout() {
                 <div>
                   <h3 style={{ fontWeight: 700, marginBottom: 24 }}>Shipping Address</h3>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-                    <InputField label="First Name" placeholder="John" value={form.firstName} onChange={updateForm('firstName')} required />
-                    <InputField label="Last Name" placeholder="Doe" value={form.lastName} onChange={updateForm('lastName')} required />
-                    <InputField label="Email" type="email" placeholder="john@email.com" value={form.email} onChange={updateForm('email')} required />
-                    <InputField label="Phone" type="tel" placeholder="+1 555 0000" value={form.phone} onChange={updateForm('phone')} />
+                    <InputField label="First Name" placeholder="John" value={form.firstName} onChange={updateForm('firstName')} required inputRef={setRef('firstName')} onKeyDown={handleKeyDown('firstName')} disabled={isFieldDisabled('firstName')} />
+                    <InputField label="Last Name" placeholder="Doe" value={form.lastName} onChange={updateForm('lastName')} required inputRef={setRef('lastName')} onKeyDown={handleKeyDown('lastName')} disabled={isFieldDisabled('lastName')} />
+                    <InputField label="Email" type="email" placeholder="john@email.com" value={form.email} onChange={updateForm('email')} required inputRef={setRef('email')} onKeyDown={handleKeyDown('email')} disabled={isFieldDisabled('email')} />
+                    <InputField label="Phone" type="tel" placeholder="+1 555 0000" value={form.phone} onChange={updateForm('phone')} inputRef={setRef('phone')} onKeyDown={handleKeyDown('phone')} disabled={isFieldDisabled('phone')} />
                     <div style={{ gridColumn: '1 / -1' }}>
-                      <InputField label="Address" placeholder="123 Main Street" value={form.address} onChange={updateForm('address')} required />
+                      <InputField label="Address" placeholder="123 Main Street" value={form.address} onChange={updateForm('address')} required inputRef={setRef('address')} onKeyDown={handleKeyDown('address')} disabled={isFieldDisabled('address')} />
                     </div>
-                    <InputField label="City" placeholder="New York" value={form.city} onChange={updateForm('city')} required />
-                    <InputField label="State / Province" placeholder="NY" value={form.state} onChange={updateForm('state')} />
-                    <InputField label="ZIP / Postal Code" placeholder="10001" value={form.zip} onChange={updateForm('zip')} required />
-                    <InputField label="Country" placeholder="United States" value={form.country} onChange={updateForm('country')} required />
+                    <InputField label="City" placeholder="New York" value={form.city} onChange={updateForm('city')} required inputRef={setRef('city')} onKeyDown={handleKeyDown('city')} disabled={isFieldDisabled('city')} />
+                    <InputField label="State / Province" placeholder="NY" value={form.state} onChange={updateForm('state')} inputRef={setRef('state')} onKeyDown={handleKeyDown('state')} disabled={isFieldDisabled('state')} />
+                    <InputField label="ZIP / Postal Code" placeholder="10001" value={form.zip} onChange={updateForm('zip')} required inputRef={setRef('zip')} onKeyDown={handleKeyDown('zip')} disabled={isFieldDisabled('zip')} />
+                    <InputField label="Country" placeholder="United States" value={form.country} onChange={updateForm('country')} required inputRef={setRef('country')} onKeyDown={handleKeyDown('country')} disabled={isFieldDisabled('country')} />
                   </div>
 
                   <h3 style={{ fontWeight: 700, marginTop: 28, marginBottom: 16 }}>Shipping Method</h3>

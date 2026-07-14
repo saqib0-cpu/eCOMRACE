@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff } from 'lucide-react';
@@ -7,6 +7,34 @@ export default function Register() {
   const navigate = useNavigate();
   const [form, setForm] = useState({ firstName: '', lastName: '', email: '', password: '', confirm: '' });
   const [showPw, setShowPw] = useState(false);
+
+  const inputRefs = useRef({});
+  const setRef = key => el => { inputRefs.current[key] = el; };
+  const fieldOrder = ['firstName', 'lastName', 'email', 'password', 'confirm'];
+
+  const isFieldDisabled = (key) => {
+     const idx = fieldOrder.indexOf(key);
+     if (idx <= 0) return false;
+     for(let i=0; i<idx; i++) {
+        const prevKey = fieldOrder[i];
+        if (!form[prevKey]) return true;
+     }
+     return false;
+  };
+
+  const handleKeyDown = (key) => (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (!form[key]) return;
+      const idx = fieldOrder.indexOf(key);
+      if (idx >= 0 && idx < fieldOrder.length - 1) {
+        const nextKey = fieldOrder[idx + 1];
+        if (inputRefs.current[nextKey]) {
+          inputRefs.current[nextKey].focus();
+        }
+      }
+    }
+  };
 
   const update = k => e => setForm(f => ({ ...f, [k]: e.target.value }));
 
@@ -27,11 +55,14 @@ export default function Register() {
     <div>
       <label style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block', marginBottom: 8, fontWeight: 500 }}>{label}</label>
       <input
+        ref={setRef(k)}
         type={type}
         placeholder={placeholder}
-        style={inputStyle}
+        style={{ ...inputStyle, opacity: isFieldDisabled(k) ? 0.5 : 1 }}
         value={form[k]}
         onChange={update(k)}
+        onKeyDown={handleKeyDown(k)}
+        disabled={isFieldDisabled(k)}
         onFocus={e => e.target.style.borderColor = 'var(--accent-gold)'}
         onBlur={e => e.target.style.borderColor = 'var(--border-color)'}
       />
@@ -91,11 +122,14 @@ export default function Register() {
             </div>
             <div style={{ position: 'relative' }}>
               <input
+                ref={setRef('password')}
                 type={showPw ? 'text' : 'password'}
                 placeholder="Min. 8 characters"
-                style={{ ...inputStyle, paddingRight: 46 }}
+                style={{ ...inputStyle, paddingRight: 46, opacity: isFieldDisabled('password') ? 0.5 : 1 }}
                 value={form.password}
                 onChange={update('password')}
+                onKeyDown={handleKeyDown('password')}
+                disabled={isFieldDisabled('password')}
                 onFocus={e => e.target.style.borderColor = 'var(--accent-gold)'}
                 onBlur={e => e.target.style.borderColor = 'var(--border-color)'}
               />

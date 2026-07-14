@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingCart, Heart, Share2, Star } from 'lucide-react';
 import { useCart } from '../context/CartContext';
-import { PRODUCTS } from '../data/products';
+import { useProducts } from '../context/ProductsContext';
 import ProductCard from '../components/ProductCard';
 import './ProductDetail.css';
 
@@ -31,7 +31,8 @@ function StarRating({ rating, size = 14 }) {
 export default function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const product = PRODUCTS.find(p => p.id === Number(id));
+  const { products } = useProducts();
+  const product = products.find(p => p.id === Number(id));
   const { addToCart, toggleWishlist, isInWishlist } = useCart();
   const [activeImg, setActiveImg] = useState(0);
   const [qty, setQty] = useState(1);
@@ -53,7 +54,7 @@ export default function ProductDetail() {
     ? Math.round(((product.price - product.salePrice) / product.price) * 100)
     : null;
 
-  const relatedProducts = PRODUCTS
+  const relatedProducts = products
     .filter(p => p.category === product.category && p.id !== product.id)
     .slice(0, 4);
 

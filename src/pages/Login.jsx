@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff } from 'lucide-react';
@@ -7,6 +7,24 @@ export default function Login() {
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: '', password: '' });
   const [showPw, setShowPw] = useState(false);
+
+  const inputRefs = useRef({});
+  const setRef = key => el => { inputRefs.current[key] = el; };
+  
+  const isFieldDisabled = (key) => {
+     if (key === 'password') return !form.email;
+     return false;
+  };
+
+  const handleKeyDown = (key) => (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (!form[key]) return;
+      if (key === 'email' && inputRefs.current['password']) {
+        inputRefs.current['password'].focus();
+      }
+    }
+  };
 
   const update = k => e => setForm(f => ({ ...f, [k]: e.target.value }));
 
@@ -72,11 +90,14 @@ export default function Login() {
           <div>
             <label style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block', marginBottom: 8, fontWeight: 500 }}>Email Address</label>
             <input
+              ref={setRef('email')}
               type="email"
               placeholder="you@email.com"
-              style={inputStyle}
+              style={{ ...inputStyle, opacity: isFieldDisabled('email') ? 0.5 : 1 }}
               value={form.email}
               onChange={update('email')}
+              onKeyDown={handleKeyDown('email')}
+              disabled={isFieldDisabled('email')}
               onFocus={e => e.target.style.borderColor = 'var(--accent-gold)'}
               onBlur={e => e.target.style.borderColor = 'var(--border-color)'}
             />
@@ -90,11 +111,14 @@ export default function Login() {
             </div>
             <div style={{ position: 'relative' }}>
               <input
+                ref={setRef('password')}
                 type={showPw ? 'text' : 'password'}
                 placeholder="••••••••"
-                style={{ ...inputStyle, paddingRight: 46 }}
+                style={{ ...inputStyle, paddingRight: 46, opacity: isFieldDisabled('password') ? 0.5 : 1 }}
                 value={form.password}
                 onChange={update('password')}
+                onKeyDown={handleKeyDown('password')}
+                disabled={isFieldDisabled('password')}
                 onFocus={e => e.target.style.borderColor = 'var(--accent-gold)'}
                 onBlur={e => e.target.style.borderColor = 'var(--border-color)'}
               />

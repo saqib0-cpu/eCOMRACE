@@ -3,7 +3,7 @@ import { useSearchParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SlidersHorizontal, X } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
-import { CATEGORIES, PRODUCTS } from '../data/products';
+import { useProducts } from '../context/ProductsContext';
 import './Shop.css';
 
 const SORT_OPTIONS = [
@@ -23,6 +23,7 @@ export default function Shop() {
   const [selectedSubs, setSelectedSubs] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
   const [searchQuery] = useState(searchParams.get('search') || '');
+  const { products: PRODUCTS, categories: CATEGORIES } = useProducts();
 
   useEffect(() => {
     const cat = searchParams.get('category');

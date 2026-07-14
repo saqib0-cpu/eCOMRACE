@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Play, ShoppingBag, Shield, Truck, RotateCcw, Star } from 'lucide-react';
+import { useProducts } from '../context/ProductsContext';
 import ProductCard from '../components/ProductCard';
-import { CATEGORIES, PRODUCTS } from '../data/products';
 import './Home.css';
 
 // Hero images carousel
@@ -74,6 +74,7 @@ export default function Home() {
     return () => clearInterval(t);
   }, []);
 
+  const { products: PRODUCTS, categories: CATEGORIES } = useProducts();
   const newArrivals = PRODUCTS.filter(p => p.isNew).slice(0, 8);
   const bestSellers = PRODUCTS.filter(p => p.isBestSeller).slice(0, 4);
   const slide = HERO_SLIDES[currentSlide];
@@ -253,24 +254,66 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              whileHover={{ y: -6 }}
+              whileHover="hover"
               onClick={() => navigate(`/shop?category=${cat.id}`)}
+              style={{ overflow: 'hidden', position: 'relative' }}
             >
-              {/* Background gradient */}
+              {/* Animated Background Image */}
+              <motion.div
+                variants={{
+                  hover: { scale: 1.15 }
+                }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  zIndex: 0,
+                  backgroundImage: `url(${cat.image})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              />
+              
+              {/* Dark Overlay for better text readability */}
               <div
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  zIndex: 1,
+                  background: `linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.2) 100%)`,
+                }}
+              />
+
+              {/* Background gradient from color */}
+              <motion.div
                 className="category-card-gradient"
-                style={{ background: `radial-gradient(ellipse at 60% 40%, ${cat.color}25, transparent 70%)` }}
+                variants={{
+                  hover: { opacity: 0.8 }
+                }}
+                style={{ 
+                  position: 'absolute', inset: 0, zIndex: 1, 
+                  background: `radial-gradient(ellipse at 50% 100%, ${cat.color}40, transparent 70%)`,
+                  opacity: 0.4
+                }}
+                transition={{ duration: 0.4 }}
               />
 
               {/* Content */}
-              <div className="category-card-body">
-                <div className="category-icon">{cat.icon}</div>
-                <h3 className="category-name">{cat.name}</h3>
+              <motion.div 
+                className="category-card-body" 
+                style={{ position: 'relative', zIndex: 2 }}
+                variants={{
+                  hover: { y: -8 }
+                }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+              >
+                <div className="category-icon" style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }}>{cat.icon}</div>
+                <h3 className="category-name" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.8))' }}>{cat.name}</h3>
                 <p className="category-count">{cat.productCount} Products</p>
-                <div className="category-btn">
+                <div className="category-btn" style={{ color: cat.color }}>
                   Shop Now <ArrowRight size={13} />
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>

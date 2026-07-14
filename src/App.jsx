@@ -1,8 +1,11 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CartProvider } from './context/CartContext';
+import { ProductsProvider } from './context/ProductsContext';
+import { AdminProvider } from './context/AdminContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Admin from './pages/Admin';
 
 import Home from './pages/Home';
 import Shop from './pages/Shop';
@@ -39,16 +42,18 @@ function NotFound() {
   );
 }
 
-// Pages that hide the footer
+// Pages that hide the footer AND navbar
 const NO_FOOTER = ['/login', '/register', '/checkout'];
+const NO_NAV_FOOTER = ['/admin'];
 
 function AppContent() {
   const location = useLocation();
-  const hideFooter = NO_FOOTER.includes(location.pathname);
+  const hideFooter = NO_FOOTER.includes(location.pathname) || location.pathname.startsWith('/admin');
+  const hideNav = location.pathname.startsWith('/admin');
 
   return (
     <>
-      <Navbar />
+      {!hideNav && <Navbar />}
       <AnimatePresence mode="wait">
         <motion.div key={location.pathname} {...pageTransition}>
           <Routes location={location}>
@@ -67,6 +72,7 @@ function AppContent() {
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/returns" element={<Returns />} />
             <Route path="/terms" element={<Terms />} />
+            <Route path="/admin" element={<Admin />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </motion.div>
@@ -79,9 +85,13 @@ function AppContent() {
 export default function App() {
   return (
     <BrowserRouter>
-      <CartProvider>
-        <AppContent />
-      </CartProvider>
+      <AdminProvider>
+        <ProductsProvider>
+          <CartProvider>
+            <AppContent />
+          </CartProvider>
+        </ProductsProvider>
+      </AdminProvider>
     </BrowserRouter>
   );
 }

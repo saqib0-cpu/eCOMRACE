@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingCart, Heart, Search, User, X, ChevronDown, Menu } from 'lucide-react';
+import { ShoppingCart, Heart, Search, User, X, ChevronDown, Menu, Shield } from 'lucide-react';
 import { useCart } from '../context/CartContext';
-import { CATEGORIES, PRODUCTS } from '../data/products';
+import { useProducts } from '../context/ProductsContext';
+import { useAdmin } from '../context/AdminContext';
 import './Navbar.css';
 
 export default function Navbar() {
@@ -13,6 +14,8 @@ export default function Navbar() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { cartCount, wishlist } = useCart();
+  const { products: PRODUCTS, categories: CATEGORIES } = useProducts();
+  const { isAdmin } = useAdmin();
   const navigate = useNavigate();
   const location = useLocation();
   const searchRef = useRef(null);
@@ -119,6 +122,9 @@ export default function Navbar() {
           </Link>
           <Link to="/account" className="icon-btn" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <User size={18} />
+          </Link>
+          <Link to="/admin" className="icon-btn" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: isAdmin ? '#d4af37' : undefined }} title="Admin Panel">
+            <Shield size={17} />
           </Link>
 
           {/* Hamburger */}

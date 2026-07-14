@@ -8,6 +8,7 @@ export const CATEGORIES = [
     subcategories: ['Wristwatches', 'Smart Watches', 'Pocket Watches', 'Watch Accessories'],
     productCount: 38,
     color: '#d4af37',
+    image: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=800&q=80',
   },
   {
     id: 'mobile-accessories',
@@ -17,6 +18,7 @@ export const CATEGORIES = [
     subcategories: ['Cases', 'Chargers', 'Cables', 'Earphones', 'Power Banks', 'Screen Protectors'],
     productCount: 38,
     color: '#60a5fa',
+    image: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800&q=80',
   },
   {
     id: 'bags-wallets',
@@ -26,6 +28,7 @@ export const CATEGORIES = [
     subcategories: ['Leather Wallets', 'Messenger Bags', 'Backpacks', 'Travel Bags'],
     productCount: 24,
     color: '#a78bfa',
+    image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800&q=80',
   },
   {
     id: 'home-decor',
@@ -35,6 +38,7 @@ export const CATEGORIES = [
     subcategories: ['Desk Organizers', 'LED Lamps', 'Wall Art', 'Planters', 'Small Décor'],
     productCount: 20,
     color: '#34d399',
+    image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=80',
   },
 ];
 
@@ -43,9 +47,9 @@ export const PRODUCTS = [
   {
     id: 1, name: 'Phantom Noir Chronograph', category: 'watches', subcategory: 'Wristwatches',
     price: 299, salePrice: 249, rating: 4.8, reviews: 124, inStock: true, isNew: true, isBestSeller: false,
-    image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80',
+    image: 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=800&q=80',
     images: [
-      'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80',
+      'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=800&q=80',
       'https://images.unsplash.com/photo-1509941943102-10c232535736?w=800&q=80',
       'https://images.unsplash.com/photo-1548171915-e79a380a2a4b?w=800&q=80',
     ],
@@ -56,10 +60,10 @@ export const PRODUCTS = [
   {
     id: 2, name: 'Aurora Smart Watch Pro', category: 'watches', subcategory: 'Smart Watches',
     price: 199, salePrice: null, rating: 4.6, reviews: 89, inStock: true, isNew: true, isBestSeller: true,
-    image: 'https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=400&q=80',
+    image: 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=800&q=80',
     images: [
-      'https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=800&q=80',
       'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=800&q=80',
+      'https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=800&q=80',
     ],
     description: 'Next-gen smartwatch with AMOLED display, health tracking, and 7-day battery life.',
     sku: 'WCH-002', tags: ['smart', 'amoled', 'health'],
@@ -88,8 +92,8 @@ export const PRODUCTS = [
   {
     id: 5, name: 'Celestial Skeleton', category: 'watches', subcategory: 'Wristwatches',
     price: 589, salePrice: null, rating: 5.0, reviews: 31, inStock: true, isNew: true, isBestSeller: false,
-    image: 'https://images.unsplash.com/photo-1557531365-e8b22d93dbd0?w=400&q=80',
-    images: ['https://images.unsplash.com/photo-1557531365-e8b22d93dbd0?w=800&q=80'],
+    image: 'https://images.unsplash.com/photo-1622434641406-a158123450f9?w=800&q=80',
+    images: ['https://images.unsplash.com/photo-1622434641406-a158123450f9?w=800&q=80'],
     description: 'See the heartbeat of precision. A stunning skeletonized movement reveals the intricate mechanics within.',
     sku: 'WCH-005', tags: ['skeleton', 'luxury', 'mechanical'],
     specs: { 'Movement': 'Manual Wind Skeleton', 'Case': 'Rose Gold', 'Power Reserve': '48h', 'Crystal': 'Sapphire' },
@@ -108,8 +112,8 @@ export const PRODUCTS = [
   {
     id: 7, name: 'ArcShield Pro Case', category: 'mobile-accessories', subcategory: 'Cases',
     price: 29, salePrice: 19, rating: 4.7, reviews: 455, inStock: true, isNew: true, isBestSeller: true,
-    image: 'https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=400&q=80',
-    images: ['https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=800&q=80'],
+    image: 'https://images.unsplash.com/photo-1616348436168-de43ad0db179?w=800&q=80',
+    images: ['https://images.unsplash.com/photo-1616348436168-de43ad0db179?w=800&q=80'],
     description: 'Military-grade drop protection with a sleek profile. Compatible with all wireless chargers.',
     sku: 'MOB-001', tags: ['protection', 'magsafe', 'slim'],
     specs: { 'Material': 'Polycarbonate + TPU', 'Protection': 'MIL-STD-810H', 'Compatibility': 'MagSafe', 'Thickness': '1.2mm' },
@@ -135,8 +139,8 @@ export const PRODUCTS = [
   {
     id: 10, name: 'NovaBuds ANC Earphones', category: 'mobile-accessories', subcategory: 'Earphones',
     price: 89, salePrice: 69, rating: 4.6, reviews: 198, inStock: true, isNew: true, isBestSeller: false,
-    image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400&q=80',
-    images: ['https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=800&q=80'],
+    image: 'https://images.unsplash.com/photo-1608156639585-b3a032ef9689?w=800&q=80',
+    images: ['https://images.unsplash.com/photo-1608156639585-b3a032ef9689?w=800&q=80'],
     description: 'Active Noise Cancellation with premium audio drivers and 30-hour total battery life.',
     sku: 'MOB-004', tags: ['anc', 'earbuds', 'bluetooth 5.3'],
     specs: { 'ANC': 'Hybrid Active', 'Battery': '8h + 22h case', 'Driver': '11mm Custom', 'Codec': 'LDAC, AAC, SBC' },
@@ -173,8 +177,8 @@ export const PRODUCTS = [
   {
     id: 14, name: 'Urbane Messenger Bag', category: 'bags-wallets', subcategory: 'Messenger Bags',
     price: 149, salePrice: null, rating: 4.7, reviews: 92, inStock: true, isNew: true, isBestSeller: false,
-    image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&q=80',
-    images: ['https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80'],
+    image: 'https://images.unsplash.com/photo-1554342872-034a06541bad?w=800&q=80',
+    images: ['https://images.unsplash.com/photo-1554342872-034a06541bad?w=800&q=80'],
     description: 'Fits 15" laptop. Waxed canvas exterior with premium leather straps and brass hardware.',
     sku: 'BAG-002', tags: ['messenger', 'laptop', 'canvas'],
     specs: { 'Material': 'Waxed Canvas + Leather', 'Laptop Fit': '15"', 'Volume': '18L', 'Closure': 'Magnetic Snap' },
@@ -202,8 +206,8 @@ export const PRODUCTS = [
   {
     id: 17, name: 'Lumina Arc Desk Lamp', category: 'home-decor', subcategory: 'LED Lamps',
     price: 89, salePrice: 69, rating: 4.7, reviews: 154, inStock: true, isNew: true, isBestSeller: true,
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80',
-    images: ['https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80'],
+    image: 'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=800&q=80',
+    images: ['https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=800&q=80'],
     description: 'Architect-style LED desk lamp with 5 color temperatures, touch dimming, and USB-C charging base.',
     sku: 'DCR-001', tags: ['lamp', 'led', 'touch dimming'],
     specs: { 'Color Temp': '2700K-6500K', 'Brightness': '10 levels', 'Base Port': 'USB-C 18W', 'Material': 'Aluminum' },
@@ -229,8 +233,8 @@ export const PRODUCTS = [
   {
     id: 20, name: 'Abstract Gold Wall Art', category: 'home-decor', subcategory: 'Wall Art',
     price: 99, salePrice: null, rating: 4.8, reviews: 43, inStock: true, isNew: true, isBestSeller: false,
-    image: 'https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=400&q=80',
-    images: ['https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=800&q=80'],
+    image: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&q=80',
+    images: ['https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&q=80'],
     description: 'Framed abstract canvas with metallic gold accents on deep black background. Museum quality print.',
     sku: 'DCR-004', tags: ['art', 'gold', 'canvas'],
     specs: { 'Size': '60x80cm', 'Frame': 'Black Aluminum', 'Print': 'UV Museum Quality', 'Hanging': 'Hardware included' },
@@ -240,8 +244,8 @@ export const PRODUCTS = [
   {
     id: 21, name: 'Obsidian Smart Fit', category: 'watches', subcategory: 'Smart Watches',
     price: 159, salePrice: 129, rating: 4.5, reviews: 312, inStock: true, isNew: true, isBestSeller: false,
-    image: 'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=400&q=80',
-    images: ['https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=800&q=80'],
+    image: 'https://images.unsplash.com/photo-1575311373937-040b8e1fd5b9?w=800&q=80',
+    images: ['https://images.unsplash.com/photo-1575311373937-040b8e1fd5b9?w=800&q=80'],
     description: 'Sleek fitness tracking smartwatch with heart rate monitoring and sleep tracking.',
     sku: 'WCH-007', tags: ['smart', 'fitness', 'black'],
     specs: { 'Display': 'OLED', 'Battery': '5 days', 'Water Resistance': 'IP68', 'OS': 'Custom' },
@@ -260,8 +264,8 @@ export const PRODUCTS = [
   {
     id: 23, name: 'Magnetic Wireless Power Bank', category: 'mobile-accessories', subcategory: 'Power Banks',
     price: 45, salePrice: 39, rating: 4.9, reviews: 521, inStock: true, isNew: true, isBestSeller: true,
-    image: 'https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400&q=80',
-    images: ['https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=800&q=80'],
+    image: 'https://images.unsplash.com/photo-1620189507195-68309c04c4d0?w=800&q=80',
+    images: ['https://images.unsplash.com/photo-1620189507195-68309c04c4d0?w=800&q=80'],
     description: 'Snap-on 10,000mAh magnetic power bank. Perfect for on-the-go wireless charging.',
     sku: 'MOB-007', tags: ['magsafe', 'wireless', 'powerbank'],
     specs: { 'Capacity': '10,000mAh', 'Wireless Output': '15W', 'Wired Output': '20W PD', 'Compatibility': 'MagSafe' },
