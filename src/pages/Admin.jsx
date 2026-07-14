@@ -11,6 +11,37 @@ import { useAdmin } from '../context/AdminContext';
 import { useProducts } from '../context/ProductsContext';
 import { useCart } from '../context/CartContext';
 
+const adminStyles = `
+  .admin-layout { display: flex; min-height: 100vh; background: #070d1a; font-family: Inter, sans-serif; }
+  .admin-sidebar { width: 240px; flex-shrink: 0; background: rgba(255,255,255,0.025); border-right: 1px solid rgba(255,255,255,0.07); display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; overflow: hidden; z-index: 20; }
+  .admin-sidebar-nav { flex: 1; padding: 16px 12px; }
+  .admin-sidebar-footer { padding: 16px 12px; border-top: 1px solid rgba(255,255,255,0.06); }
+  .admin-topbar { padding: 24px 32px; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; background: #070d1a; z-index: 10; }
+  .admin-content { padding: 28px 32px; }
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+  .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .category-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  
+  @media (max-width: 768px) {
+    .admin-layout { flex-direction: column; }
+    .admin-sidebar { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .admin-sidebar-nav { display: flex; overflow-x: auto; padding: 12px; gap: 8px; }
+    .admin-sidebar-nav::-webkit-scrollbar { display: none; }
+    .admin-sidebar-nav > button { margin-bottom: 0 !important; white-space: nowrap; flex: 0 0 auto; width: auto !important; }
+    .admin-sidebar-footer { display: none; }
+    .admin-topbar { padding: 16px; flex-direction: column; align-items: flex-start; gap: 12px; }
+    .admin-content { padding: 16px; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
+    .product-grid { grid-template-columns: 1fr; gap: 12px; }
+    .category-grid { grid-template-columns: 1fr; gap: 12px; }
+    .form-grid { grid-template-columns: 1fr; gap: 16px; }
+  }
+  @media (max-width: 480px) {
+    .stat-grid { grid-template-columns: 1fr; }
+  }
+`;
+
 /* ────────────────────────────────────────────────────── */
 /*  ADMIN LOGIN SCREEN                                    */
 /* ────────────────────────────────────────────────────── */
@@ -234,7 +265,7 @@ function ProductModal({ product, categories, onSave, onClose }) {
           </button>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+        <div className="form-grid">
           {/* Name */}
           <div style={{ gridColumn: '1/-1' }}>
             <FormField label="Product Name *" error={errors.name}>
@@ -399,7 +430,7 @@ function DashboardTab({ products, categories, cartItems }) {
 
   return (
     <div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
+      <div className="stat-grid">
         <StatCard icon={<Package size={22} color="#d4af37" />} label="TOTAL PRODUCTS" value={products.length} sub={`${inStock} In Stock`} color="#d4af37" />
         <StatCard icon={<FolderOpen size={22} color="#60a5fa" />} label="CATEGORIES" value={categories.length} sub="Active" color="#60a5fa" />
         <StatCard icon={<ShoppingCart size={22} color="#34d399" />} label="CART ITEMS" value={cartItems.length} sub={`Rs ${totalRevenue.toFixed(0)} pending`} color="#34d399" />
@@ -501,7 +532,7 @@ function ProductsTab() {
       </div>
 
       {/* Products Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16 }}>
+      <div className="product-grid">
         <AnimatePresence>
           {filtered.map(p => (
             <motion.div
@@ -620,7 +651,7 @@ function CategoriesTab() {
         </motion.button>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 16 }}>
+      <div className="category-grid">
         {categories.map(cat => (
           <motion.div key={cat.id} whileHover={{ y: -3 }}
             style={{ ...cardSty, position: 'relative', overflow: 'hidden' }}>
@@ -778,13 +809,10 @@ function AdminDashboard() {
   const navigate = useNavigate();
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: '#070d1a', fontFamily: 'Inter, sans-serif' }}>
+    <div className="admin-layout">
+      <style>{adminStyles}</style>
       {/* Sidebar */}
-      <div style={{
-        width: 240, flexShrink: 0, background: 'rgba(255,255,255,0.025)',
-        borderRight: '1px solid rgba(255,255,255,0.07)',
-        display: 'flex', flexDirection: 'column', position: 'sticky', top: 0, height: '100vh', overflow: 'hidden',
-      }}>
+      <div className="admin-sidebar">
         {/* Sidebar Logo */}
         <div style={{ padding: '28px 24px 20px', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -799,7 +827,7 @@ function AdminDashboard() {
         </div>
 
         {/* Nav Items */}
-        <nav style={{ flex: 1, padding: '16px 12px' }}>
+        <nav className="admin-sidebar-nav">
           {TABS.map(tab => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -823,7 +851,7 @@ function AdminDashboard() {
         </nav>
 
         {/* Sidebar Footer */}
-        <div style={{ padding: '16px 12px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="admin-sidebar-footer">
           <button onClick={() => navigate('/')}
             style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px', borderRadius: 12, border: 'none', background: 'transparent', color: 'rgba(255,255,255,0.35)', cursor: 'pointer', fontWeight: 500, fontSize: '0.8rem', marginBottom: 4, fontFamily: 'inherit' }}>
             <Eye size={15} /> View Store
@@ -836,9 +864,9 @@ function AdminDashboard() {
       </div>
 
       {/* Main Content */}
-      <div style={{ flex: 1, overflow: 'auto' }}>
+      <div style={{ flex: 1, overflow: 'auto', display: 'flex', flexDirection: 'column' }}>
         {/* Top Bar */}
-        <div style={{ padding: '24px 32px', borderBottom: '1px solid rgba(255,255,255,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, background: '#070d1a', zIndex: 10 }}>
+        <div className="admin-topbar">
           <div>
             <h1 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#fff' }}>
               {TABS.find(t => t.id === activeTab)?.label}
@@ -856,7 +884,7 @@ function AdminDashboard() {
         </div>
 
         {/* Tab Content */}
-        <div style={{ padding: '28px 32px' }}>
+        <div className="admin-content">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
